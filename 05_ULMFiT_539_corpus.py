@@ -2,7 +2,6 @@ from fastai import *        # Quick access to most common functionality
 from fastai.text import *   # Quick access to NLP functionality
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import glob
 path = Path('ULMFiT/full_20_labels_same_data')
 path.mkdir(exist_ok=True)
 torch.cuda.set_device(1)
