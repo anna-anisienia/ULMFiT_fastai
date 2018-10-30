@@ -2,7 +2,7 @@ from fastai import *        # Quick access to most common functionality
 from fastai.text import *   # Quick access to NLP functionality
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import glob
+
 path = Path('ULMFiT/full_20_labels_same_data2')
 path.mkdir(exist_ok=True)
 torch.cuda.set_device(1)
@@ -23,8 +23,8 @@ train_ds = TextDataset.from_csv(folder=path, name="train", n_labels=20)
 data_lm = TextLMDataBunch.from_csv(path=path, train="train", valid="valid")
 data_clas = TextClasDataBunch.from_csv(path=path, train="train", valid="valid", test="test",
                                       vocab = data_lm.train_ds.vocab, bs = 16, n_labels = 20)
-                                      # Fine-tuning of Wikitext 103 LM based on my data
-
+                                      
+# Fine-tuning of Wikitext 103 LM based on my data
 learn = RNNLearner.language_model(data_lm, pretrained_model=URLs.WT103)
 learn.fit(2, 1e-2)
 # Further Fine-tuning of LM to Target task data
