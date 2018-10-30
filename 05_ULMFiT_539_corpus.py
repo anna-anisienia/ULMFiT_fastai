@@ -36,8 +36,8 @@ train_ds = TextDataset.from_csv(folder=clas_path, name="train", n_labels=20)
 data_lm = TextLMDataBunch.from_csv(path=lm_path, train="train", valid="valid", n_labels=1)
 data_clas = TextClasDataBunch.from_csv(path=clas_path, train="train", valid="valid", test="test",
                                       vocab = data_lm.train_ds.vocab, bs = 16, n_labels = 20)
-                                      # Fine-tuning of Wikitext 103 LM based on my data
-
+                                      
+# Fine-tuning of Wikitext 103 LM based on my data
 learn = RNNLearner.language_model(data_lm, pretrained_model=URLs.WT103)
 learn.fit(2, 1e-2)
 # Further Fine-tuning of LM to Target task data
